@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DNW1 Manager Attendance Overview</title>
+<title>DNW1 Attendance Overview</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
 body { font-family: 'Amazon Ember', Arial, sans-serif; padding: 15px 30px; background: #ffffff; user-select: none; text-align: center; min-height: 100vh; box-sizing: border-box; }
 .page-wrapper { width: 95%; max-width: 1800px; margin: 0 auto; }
 h1 { color: #232F3E; margin-bottom: 5px; }
 .nav-bar { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; gap: 15px; }
+.nav-left { display: flex; align-items: center; } .nav-center { display: flex; align-items: center; gap: 15px; } .nav-right { display: flex; align-items: center; }
 .view-toggle { display: flex; justify-content: center; gap: 0; }
 .toggle-btn { padding: 12px 28px; font-size: 1em; font-weight: bold; border: 2px solid #232f3e; cursor: pointer; background: white; color: #000000; transition: all 0.2s; }
 .toggle-btn:first-child { border-radius: 6px 0 0 6px; }
@@ -20,7 +20,6 @@ h1 { color: #232F3E; margin-bottom: 5px; }
 .import-btn { padding: 10px 20px; font-size: 0.9em; font-weight: bold; background: #0073bb; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
 .import-btn:hover { background: #005a9e; }
 #file-input { display: none; }
-.nav-left { display: flex; align-items: center; } .nav-center { display: flex; align-items: center; gap: 15px; } .nav-right { display: flex; align-items: center; }
 .nav-center h3 { color: #232F3E; margin: 0; font-weight: normal; min-width: 280px; text-align: center; }
 .arrow { background: #232f3e; color: white; border: none; padding: 10px 18px; font-size: 1.3em; cursor: pointer; border-radius: 6px; transition: background 0.2s; }
 .arrow:hover { background: #37475a; }
@@ -32,8 +31,8 @@ h1 { color: #232F3E; margin-bottom: 5px; }
 .weeks-container { display: flex; gap: 30px; flex-wrap: nowrap; justify-content: center; }
 .week-block { display: none; flex: 1; min-width: 0; }
 .week-block.visible { display: block; }
-.week-label { font-weight: bold; color: #ffffff; margin-bottom: 6px; font-size: 0.95em; }
-table { border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: white; width: 100%; border: 1px solid #ddd; }
+.week-label { font-weight: bold; color: #232f3e; margin-bottom: 6px; font-size: 0.95em; }
+table { border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: white; width: 100%; }
 th, td { border: 1px solid #ddd; padding: 18px 20px; text-align: center; min-width: 50px; height: 60px; }
 th { background: #232F3E; color: white; font-weight: bold; }
 th.name-header { text-align: left; min-width: 180px; }
@@ -80,996 +79,14 @@ td.black { background-color: #000000; }
         <input type="file" id="file-input" accept=".xlsx,.xlsm,.xls" onchange="handleFileUpload(event)">
     </div>
 </div>
-<div class="status-bar" id="status-bar"></div>
+<div class="status-bar" id="status-bar">Loading data...</div>
 
 <div class="view-container active" id="view-managers">
-<div class="weeks-container">
-<div class="week-block mgr-block" data-week="30" data-year="2026" data-label="Week 30 | Jul 20 – Jul 25, 2026">
-<div class="week-label">Week 30 | Jul 20 – Jul 25, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.07</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.07</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.07</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.07</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.07</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.07</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="31" data-year="2026" data-label="Week 31 | Jul 27 – Aug 01, 2026">
-<div class="week-label">Week 31 | Jul 27 – Aug 01, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.07</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.07</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.07</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.07</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.07</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="32" data-year="2026" data-label="Week 32 | Aug 03 – Aug 08, 2026">
-<div class="week-label">Week 32 | Aug 03 – Aug 08, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell grey"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="33" data-year="2026" data-label="Week 33 | Aug 10 – Aug 15, 2026">
-<div class="week-label">Week 33 | Aug 10 – Aug 15, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="34" data-year="2026" data-label="Week 34 | Aug 17 – Aug 22, 2026">
-<div class="week-label">Week 34 | Aug 17 – Aug 22, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="35" data-year="2026" data-label="Week 35 | Aug 24 – Aug 29, 2026">
-<div class="week-label">Week 35 | Aug 24 – Aug 29, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="36" data-year="2026" data-label="Week 36 | Aug 31 – Sep 05, 2026">
-<div class="week-label">Week 36 | Aug 31 – Sep 05, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell grey"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="37" data-year="2026" data-label="Week 37 | Sep 07 – Sep 12, 2026">
-<div class="week-label">Week 37 | Sep 07 – Sep 12, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="38" data-year="2026" data-label="Week 38 | Sep 14 – Sep 19, 2026">
-<div class="week-label">Week 38 | Sep 14 – Sep 19, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="39" data-year="2026" data-label="Week 39 | Sep 21 – Sep 26, 2026">
-<div class="week-label">Week 39 | Sep 21 – Sep 26, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="40" data-year="2026" data-label="Week 40 | Sep 28 – Oct 03, 2026">
-<div class="week-label">Week 40 | Sep 28 – Oct 03, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="41" data-year="2026" data-label="Week 41 | Oct 05 – Oct 10, 2026">
-<div class="week-label">Week 41 | Oct 05 – Oct 10, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="42" data-year="2026" data-label="Week 42 | Oct 12 – Oct 17, 2026">
-<div class="week-label">Week 42 | Oct 12 – Oct 17, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="43" data-year="2026" data-label="Week 43 | Oct 19 – Oct 24, 2026">
-<div class="week-label">Week 43 | Oct 19 – Oct 24, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="44" data-year="2026" data-label="Week 44 | Oct 26 – Oct 31, 2026">
-<div class="week-label">Week 44 | Oct 26 – Oct 31, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="45" data-year="2026" data-label="Week 45 | Nov 02 – Nov 07, 2026">
-<div class="week-label">Week 45 | Nov 02 – Nov 07, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="46" data-year="2026" data-label="Week 46 | Nov 09 – Nov 14, 2026">
-<div class="week-label">Week 46 | Nov 09 – Nov 14, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="47" data-year="2026" data-label="Week 47 | Nov 16 – Nov 21, 2026">
-<div class="week-label">Week 47 | Nov 16 – Nov 21, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="48" data-year="2026" data-label="Week 48 | Nov 23 – Nov 28, 2026">
-<div class="week-label">Week 48 | Nov 23 – Nov 28, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="49" data-year="2026" data-label="Week 49 | Nov 30 – Dec 05, 2026">
-<div class="week-label">Week 49 | Nov 30 – Dec 05, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="50" data-year="2026" data-label="Week 50 | Dec 07 – Dec 12, 2026">
-<div class="week-label">Week 50 | Dec 07 – Dec 12, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="51" data-year="2026" data-label="Week 51 | Dec 14 – Dec 19, 2026">
-<div class="week-label">Week 51 | Dec 14 – Dec 19, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="52" data-year="2026" data-label="Week 52 | Dec 21 – Dec 26, 2026">
-<div class="week-label">Week 52 | Dec 21 – Dec 26, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="53" data-year="2026" data-label="Week 53 | Dec 28 – Jan 02, 2027">
-<div class="week-label">Week 53 | Dec 28 – Jan 02, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="1" data-year="2027" data-label="Week 1 | Jan 04 – Jan 09, 2027">
-<div class="week-label">Week 1 | Jan 04 – Jan 09, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="2" data-year="2027" data-label="Week 2 | Jan 11 – Jan 16, 2027">
-<div class="week-label">Week 2 | Jan 11 – Jan 16, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="3" data-year="2027" data-label="Week 3 | Jan 18 – Jan 23, 2027">
-<div class="week-label">Week 3 | Jan 18 – Jan 23, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block mgr-block" data-week="4" data-year="2027" data-label="Week 4 | Jan 25 – Jan 30, 2027">
-<div class="week-label">Week 4 | Jan 25 – Jan 30, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Jannik Schwarz</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nihat Karanfil</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Haidar Ali Qamar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thanh Thao Nguyen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Nikhil Kumar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Fatih Batuhan Özdemir</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Philipp Andreas Beyer</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Igor Jurczak</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-</div>
+<div class="weeks-container"></div>
 </div>
 
 <div class="view-container" id="view-supervisors">
-<div class="weeks-container">
-<div class="week-block sup-block" data-week="30" data-year="2026" data-label="Week 30 | Jul 20 – Jul 25, 2026">
-<div class="week-label">Week 30 | Jul 20 – Jul 25, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.07</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.07</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.07</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.07</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.07</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.07</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="31" data-year="2026" data-label="Week 31 | Jul 27 – Aug 01, 2026">
-<div class="week-label">Week 31 | Jul 27 – Aug 01, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.07</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.07</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.07</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.07</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.07</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell grey"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="32" data-year="2026" data-label="Week 32 | Aug 03 – Aug 08, 2026">
-<div class="week-label">Week 32 | Aug 03 – Aug 08, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="33" data-year="2026" data-label="Week 33 | Aug 10 – Aug 15, 2026">
-<div class="week-label">Week 33 | Aug 10 – Aug 15, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="34" data-year="2026" data-label="Week 34 | Aug 17 – Aug 22, 2026">
-<div class="week-label">Week 34 | Aug 17 – Aug 22, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="35" data-year="2026" data-label="Week 35 | Aug 24 – Aug 29, 2026">
-<div class="week-label">Week 35 | Aug 24 – Aug 29, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.08</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.08</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.08</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.08</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.08</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="36" data-year="2026" data-label="Week 36 | Aug 31 – Sep 05, 2026">
-<div class="week-label">Week 36 | Aug 31 – Sep 05, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.08</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="37" data-year="2026" data-label="Week 37 | Sep 07 – Sep 12, 2026">
-<div class="week-label">Week 37 | Sep 07 – Sep 12, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="38" data-year="2026" data-label="Week 38 | Sep 14 – Sep 19, 2026">
-<div class="week-label">Week 38 | Sep 14 – Sep 19, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="39" data-year="2026" data-label="Week 39 | Sep 21 – Sep 26, 2026">
-<div class="week-label">Week 39 | Sep 21 – Sep 26, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.09</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.09</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.09</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="40" data-year="2026" data-label="Week 40 | Sep 28 – Oct 03, 2026">
-<div class="week-label">Week 40 | Sep 28 – Oct 03, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.09</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.09</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.09</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="41" data-year="2026" data-label="Week 41 | Oct 05 – Oct 10, 2026">
-<div class="week-label">Week 41 | Oct 05 – Oct 10, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="42" data-year="2026" data-label="Week 42 | Oct 12 – Oct 17, 2026">
-<div class="week-label">Week 42 | Oct 12 – Oct 17, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="43" data-year="2026" data-label="Week 43 | Oct 19 – Oct 24, 2026">
-<div class="week-label">Week 43 | Oct 19 – Oct 24, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="44" data-year="2026" data-label="Week 44 | Oct 26 – Oct 31, 2026">
-<div class="week-label">Week 44 | Oct 26 – Oct 31, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.10</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.10</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.10</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.10</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.10</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.10</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="45" data-year="2026" data-label="Week 45 | Nov 02 – Nov 07, 2026">
-<div class="week-label">Week 45 | Nov 02 – Nov 07, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="46" data-year="2026" data-label="Week 46 | Nov 09 – Nov 14, 2026">
-<div class="week-label">Week 46 | Nov 09 – Nov 14, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="47" data-year="2026" data-label="Week 47 | Nov 16 – Nov 21, 2026">
-<div class="week-label">Week 47 | Nov 16 – Nov 21, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="48" data-year="2026" data-label="Week 48 | Nov 23 – Nov 28, 2026">
-<div class="week-label">Week 48 | Nov 23 – Nov 28, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.11</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.11</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.11</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.11</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.11</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="49" data-year="2026" data-label="Week 49 | Nov 30 – Dec 05, 2026">
-<div class="week-label">Week 49 | Nov 30 – Dec 05, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.11</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">03.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="50" data-year="2026" data-label="Week 50 | Dec 07 – Dec 12, 2026">
-<div class="week-label">Week 50 | Dec 07 – Dec 12, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">10.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="51" data-year="2026" data-label="Week 51 | Dec 14 – Dec 19, 2026">
-<div class="week-label">Week 51 | Dec 14 – Dec 19, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">17.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="52" data-year="2026" data-label="Week 52 | Dec 21 – Dec 26, 2026">
-<div class="week-label">Week 52 | Dec 21 – Dec 26, 2026</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">24.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.12</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.12</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell black"></td><td class="color-cell black"></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="53" data-year="2026" data-label="Week 53 | Dec 28 – Jan 02, 2027">
-<div class="week-label">Week 53 | Dec 28 – Jan 02, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.12</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.12</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.12</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">31.12</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">01.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">02.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell red"></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell yellow"></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="1" data-year="2027" data-label="Week 1 | Jan 04 – Jan 09, 2027">
-<div class="week-label">Week 1 | Jan 04 – Jan 09, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">04.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">05.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">06.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">07.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">08.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">09.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell red"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="2" data-year="2027" data-label="Week 2 | Jan 11 – Jan 16, 2027">
-<div class="week-label">Week 2 | Jan 11 – Jan 16, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">11.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">12.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">13.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">14.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">15.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">16.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="3" data-year="2027" data-label="Week 3 | Jan 18 – Jan 23, 2027">
-<div class="week-label">Week 3 | Jan 18 – Jan 23, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">18.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">19.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">20.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">21.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">22.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">23.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-<div class="week-block sup-block" data-week="4" data-year="2027" data-label="Week 4 | Jan 25 – Jan 30, 2027">
-<div class="week-label">Week 4 | Jan 25 – Jan 30, 2027</div>
-<table>
-<thead><tr><th class="name-header">Name</th><th>Mo<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">25.01</span></th><th>Tu<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">26.01</span></th><th>We<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">27.01</span></th><th>Th<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">28.01</span></th><th>Fr<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">29.01</span></th><th>Sa<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">30.01</span></th></tr></thead>
-<tbody>
-<tr><td class="name-cell">Gokhan Gocmen</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Gamal El din Ahmed</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Dina Habal</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Osama Attar</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Shelan Hauery</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Omar Massoud</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Marcel Schnell </td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Maik Lindemann</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Thomas Meissner</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Jasmin Claudy</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-<tr><td class="name-cell">Alexander Krause</td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell green"></td><td class="color-cell "></td></tr>
-</tbody></table>
-</div>
-
-</div>
+<div class="weeks-container"></div>
 </div>
 
 <div class="legend">
@@ -1079,7 +96,7 @@ td.black { background-color: #000000; }
     <div class="legend-item"><div class="legend-box" style="background:#FFC107"></div> Saturday attendance (MOD / SOD)</div>
     <div class="legend-item"><div class="legend-box" style="background:#000000"></div> Bank Holiday</div>
 </div>
-<div class="hint">Click a cell or drag across multiple cells to select, then pick a status from the dropdown.</div>
+<div class="hint">Click a cell or drag across multiple cells to select, then pick a status from the dropdown. Auto-refreshes every 60s.</div>
 </div>
 
 <div class="dropdown" id="dropdown">
@@ -1092,39 +109,32 @@ td.black { background-color: #000000; }
 </div>
 
 <script>
-// === CONFIG ===
-const MANAGER_COLS = [(10, 'Jannik Schwarz'), (12, 'Nihat Karanfil'), (14, 'Haidar Ali Qamar'), (15, 'Thanh Thao Nguyen'), (16, 'Nikhil Kumar'), (24, 'Fatih Batuhan Özdemir'), (28, 'Philipp Andreas Beyer'), (29, 'Igor Jurczak')];
-const SUPERVISOR_COLS = [(17, 'Gokhan Gocmen'), (18, 'Gamal El din Ahmed'), (21, 'Dina Habal'), (22, 'Osama Attar'), (23, 'Shelan Hauery'), (25, 'Omar Massoud'), (26, 'Marcel Schnell '), (27, 'Maik Lindemann'), (30, 'Thomas Meissner'), (31, 'Jasmin Claudy'), (33, 'Alexander Krause')];
+const DATA_URL = 'data.json';
+const REFRESH_INTERVAL = 60000;
 
 const ABSENT_TYPES = ['Vacation', 'Vacation (Approved)', 'VTO', 'VTO (MOD)', 'Parental Leave', 'L3 Day Off'];
 const WORKSHOP_TYPES = ['Training / Workshop', 'Business Trip', 'Support', 'Other'];
 const SATURDAY_TYPES = ['MOD', 'SOD'];
-const HOLIDAYS = [
-    '2026-01-01', // Neujahr
-    '2026-04-03', // Karfreitag
-    '2026-04-06', // Ostermontag
-    '2026-05-01', // Tag der Arbeit
-    '2026-05-14', // Christi Himmelfahrt
-    '2026-05-25', // Pfingstmontag
-    '2026-06-04', // Fronleichnam
-    '2026-10-03', // Tag der Deutschen Einheit
-    '2026-11-01', // Allerheiligen
-    '2026-12-25', // 1. Weihnachtstag
-    '2026-12-26', // 2. Weihnachtstag
-    '2027-01-01', // Neujahr
-];
-
 const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAY_ABBR = {'Monday':'Mo','Tuesday':'Tu','Wednesday':'We','Thursday':'Th','Friday':'Fr','Saturday':'Sa'};
 
-// === STATE ===
 let currentView = 'managers';
 let startIndex = 0;
 let isDragging = false;
 let selectedCells = [];
+let appData = null;
 const dropdown = document.getElementById('dropdown');
 
-// === EXCEL PARSING ===
-function getStatus(value, isSaturday) {
+function getISOWeek(date) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return { year: d.getUTCFullYear(), week: Math.ceil((((d - yearStart) / 86400000) + 1) / 7) };
+}
+
+function getStatus(value, isSaturday, dateStr, holidays) {
+    if (holidays && holidays.includes(dateStr)) return 'black';
     if (isSaturday) {
         if (SATURDAY_TYPES.includes(value)) return 'yellow';
         if (ABSENT_TYPES.includes(value)) return 'red';
@@ -1136,89 +146,40 @@ function getStatus(value, isSaturday) {
     return 'green';
 }
 
-function getISOWeek(date) {
-    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    const dayNum = d.getUTCDay() || 7;
-    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-    return { year: d.getUTCFullYear(), week: weekNo };
-}
-
-function excelDateToJS(serial) {
-    const utc_days = Math.floor(serial - 25569);
-    return new Date(utc_days * 86400 * 1000);
-}
-
-function parseExcelData(data) {
-    const workbook = XLSX.read(data, { type: 'array', cellDates: false });
-    const ws = workbook.Sheets['DNW1'];
-    if (!ws) throw new Error('No "DNW1" sheet found');
-
-    const weeks = {};
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const dayOfWeek = today.getDay() || 7;
-    const monday = new Date(today);
-    monday.setDate(today.getDate() - (dayOfWeek - 1));
-
-    for (let row = 21; row <= 420; row++) {
-        const dateCell = ws[XLSX.utils.encode_cell({r: row-1, c: 8})];
-        const weekdayCell = ws[XLSX.utils.encode_cell({r: row-1, c: 6})];
-        if (!dateCell || !weekdayCell) continue;
-
-        let dateVal;
-        if (typeof dateCell.v === 'number') dateVal = excelDateToJS(dateCell.v);
-        else if (dateCell.v instanceof Date) dateVal = dateCell.v;
-        else continue;
-
-        const weekday = weekdayCell.v;
-        if (!WEEKDAYS.includes(weekday)) continue;
-        if (dateVal < monday) continue;
-
-        const iso = getISOWeek(dateVal);
-        const weekKey = iso.year * 100 + iso.week;
-        if (!weeks[weekKey]) weeks[weekKey] = [];
-
-        const rowData = {};
-        for (let col = 10; col <= 33; col++) {
-            const cell = ws[XLSX.utils.encode_cell({r: row-1, c: col-1})];
-            rowData[col] = cell ? cell.v : null;
-        }
-        weeks[weekKey].push({ date: dateVal, weekday, data: rowData });
-    }
-    return weeks;
-}
-
-function buildView(weeks, personCols, prefix) {
-    const sortedKeys = Object.keys(weeks).map(Number).sort();
+function buildViewFromData(data, personList, prefix) {
+    const sortedKeys = Object.keys(data.weeks).sort((a,b) => {
+        const [ay,aw] = a.split('-').map(Number);
+        const [by,bw] = b.split('-').map(Number);
+        return ay !== by ? ay - by : aw - bw;
+    });
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     let html = '';
 
     for (const wkKey of sortedKeys) {
-        const days = weeks[wkKey];
-        const weekNum = wkKey % 100;
-        const firstDate = days[0].date;
-        const lastDate = days[days.length-1].date;
+        const days = data.weeks[wkKey];
+        const weekNum = parseInt(wkKey.split('-')[1]);
+        const year = parseInt(wkKey.split('-')[0]);
+        const firstDate = new Date(days[0].date);
+        const lastDate = new Date(days[days.length-1].date);
         const dateLabel = 'Week ' + weekNum + ' | ' + months[firstDate.getMonth()] + ' ' + firstDate.getDate() + ' \u2013 ' + months[lastDate.getMonth()] + ' ' + lastDate.getDate() + ', ' + lastDate.getFullYear();
 
-        html += '<div class="week-block ' + prefix + '-block" data-week="' + weekNum + '" data-year="' + Math.floor(wkKey/100) + '" data-label="' + dateLabel + '">';
+        html += '<div class="week-block ' + prefix + '-block" data-week="' + weekNum + '" data-year="' + year + '" data-label="' + dateLabel + '">';
         html += '<div class="week-label">' + dateLabel + '</div>';
-        html += '<table><thead><tr><th class="name-header">Name</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody>';
+        html += '<table><thead><tr><th class="name-header">Name</th>';
+        for (const day of days) {
+            const d = new Date(day.date);
+            const abbr = DAY_ABBR[day.weekday] || day.weekday.substr(0,2);
+            const dateNum = String(d.getDate()).padStart(2,'0') + '.' + String(d.getMonth()+1).padStart(2,'0');
+            html += '<th>' + abbr + '<br><span style="font-size:0.75em;font-weight:normal;opacity:0.8">' + dateNum + '</span></th>';
+        }
+        html += '</tr></thead><tbody>';
 
-        for (const [col, name] of personCols) {
-            html += '<tr><td class="name-cell">' + name + '</td>';
+        for (const person of personList) {
+            html += '<tr><td class="name-cell">' + person.name + '</td>';
             for (const day of days) {
                 const isSat = day.weekday === 'Saturday';
-                const val = day.data[col];
-                const dateStr = day.date.getFullYear() + '-' + String(day.date.getMonth()+1).padStart(2,'0') + '-' + String(day.date.getDate()).padStart(2,'0');
-                const isHoliday = HOLIDAYS.includes(dateStr);
-                let status;
-                if (isHoliday) {
-                    status = 'black';
-                } else {
-                    status = getStatus(val, isSat);
-                }
+                const val = day.values[String(person.col)] || null;
+                const status = getStatus(val, isSat, day.date, data.holidays);
                 html += '<td class="color-cell ' + status + '"></td>';
             }
             html += '</tr>';
@@ -1228,50 +189,91 @@ function buildView(weeks, personCols, prefix) {
     return html;
 }
 
-function renderData(weeks) {
-    document.querySelector('#view-managers .weeks-container').innerHTML = buildView(weeks, MANAGER_COLS, 'mgr');
-    document.querySelector('#view-supervisors .weeks-container').innerHTML = buildView(weeks, SUPERVISOR_COLS, 'sup');
+function renderFromData(data) {
+    appData = data;
+    document.querySelector('#view-managers .weeks-container').innerHTML = buildViewFromData(data, data.managers, 'mgr');
+    document.querySelector('#view-supervisors .weeks-container').innerHTML = buildViewFromData(data, data.supervisors, 'sup');
     startIndex = getCurrentWeekIndex();
     render();
 }
 
-// Manual import
+// Auto-load from data.json
+async function loadData() {
+    try {
+        const response = await fetch(DATA_URL + '?t=' + Date.now());
+        if (!response.ok) throw new Error('data.json not found');
+        const data = await response.json();
+        renderFromData(data);
+        const now = new Date();
+        document.getElementById('status-bar').innerHTML = '<span class="live">● Live</span> — Last synced: ' + now.toLocaleTimeString() + (data.lastUpdated ? ' (data from ' + data.lastUpdated + ')' : '');
+    } catch (err) {
+        document.getElementById('status-bar').innerHTML = '⚠️ Could not load data.json — Use Import Excel button. (' + err.message + ')';
+    }
+}
+
+// Excel import fallback
+function excelDateToJS(serial) { return new Date((serial - 25569) * 86400 * 1000); }
+
 function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
         try {
-            const data = new Uint8Array(e.target.result);
-            const weeks = parseExcelData(data);
-            renderData(weeks);
-            const numWeeks = Object.keys(weeks).length;
+            const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: false });
+            const ws = wb.Sheets['DNW1'];
+            if (!ws) throw new Error('No DNW1 sheet');
+            // Parse same structure as Python does
+            const holidays = [];
+            const weeks = {};
             const now = new Date();
-            document.getElementById('status-bar').innerHTML = '<span class="live">● Live</span> — Imported: ' + file.name + ' at ' + now.toLocaleTimeString() + ' (' + numWeeks + ' weeks)';
-        } catch(err) {
-            document.getElementById('status-bar').innerHTML = '❌ Error: ' + err.message;
-        }
+            const dayOfWeek = now.getDay() || 7;
+            const monday = new Date(now); monday.setDate(now.getDate() - (dayOfWeek - 1)); monday.setHours(0,0,0,0);
+
+            for (let row = 21; row <= 420; row++) {
+                const dateCell = ws[XLSX.utils.encode_cell({r:row-1,c:8})];
+                const weekdayCell = ws[XLSX.utils.encode_cell({r:row-1,c:6})];
+                const holidayCell = ws[XLSX.utils.encode_cell({r:row-1,c:0})];
+                if (!dateCell || !weekdayCell) continue;
+                let dateVal;
+                if (typeof dateCell.v === 'number') dateVal = excelDateToJS(dateCell.v);
+                else continue;
+                if (holidayCell && holidayCell.v) holidays.push(dateVal.toISOString().slice(0,10));
+                if (!WEEKDAYS.includes(weekdayCell.v)) continue;
+                if (dateVal < monday) continue;
+                const iso = getISOWeek(dateVal);
+                const wkKey = iso.year + '-' + iso.week;
+                if (!weeks[wkKey]) weeks[wkKey] = [];
+                const values = {};
+                for (let col = 10; col <= 33; col++) {
+                    const cell = ws[XLSX.utils.encode_cell({r:row-1,c:col-1})];
+                    if (cell && cell.v) values[String(col)] = cell.v;
+                }
+                weeks[wkKey].push({ date: dateVal.toISOString().slice(0,10), weekday: weekdayCell.v, values });
+            }
+            // Use existing person lists if loaded, otherwise use defaults
+            const mgrs = appData ? appData.managers : [{col:10,name:'Jannik Schwarz'},{col:12,name:'Nihat Karanfil'},{col:14,name:'Haidar Ali Qamar'},{col:15,name:'Thanh Thao Nguyen'},{col:16,name:'Nikhil Kumar'},{col:24,name:'Fatih Batuhan Özdemir'},{col:28,name:'Philipp Andreas Beyer'},{col:29,name:'Igor Jurczak'}];
+            const sups = appData ? appData.supervisors : [{col:17,name:'Gokhan Gocmen'},{col:18,name:'Gamal El din Ahmed'},{col:21,name:'Dina Habal'},{col:22,name:'Osama Attar'},{col:23,name:'Shelan Hauery'},{col:25,name:'Omar Massoud'},{col:26,name:'Marcel Schnell'},{col:27,name:'Maik Lindemann'},{col:30,name:'Thomas Meissner'},{col:31,name:'Jasmin Claudy'},{col:33,name:'Alexander Krause'}];
+            renderFromData({ managers: mgrs, supervisors: sups, holidays, weeks, lastUpdated: new Date().toLocaleString() });
+            document.getElementById('status-bar').innerHTML = '<span class="live">● Live</span> — Imported: ' + file.name;
+        } catch(err) { document.getElementById('status-bar').innerHTML = '❌ Error: ' + err.message; }
     };
     reader.readAsArrayBuffer(file);
     event.target.value = '';
 }
 
-// === NAVIGATION ===
+// Navigation
 function getBlocks() {
-    const prefix = currentView === 'managers' ? 'mgr' : 'sup';
-    return document.querySelectorAll('.' + prefix + '-block');
+    return document.querySelectorAll('.' + (currentView === 'managers' ? 'mgr' : 'sup') + '-block');
 }
-
 function getCurrentWeekIndex() {
-    const now = new Date();
-    const iso = getISOWeek(now);
+    const iso = getISOWeek(new Date());
     const blocks = getBlocks();
     for (let i = 0; i < blocks.length; i++) {
         if (parseInt(blocks[i].dataset.week) === iso.week && parseInt(blocks[i].dataset.year) === iso.year) return i;
     }
     return 0;
 }
-
 function switchView(view) {
     currentView = view;
     document.getElementById('view-managers').classList.toggle('active', view === 'managers');
@@ -1282,7 +284,6 @@ function switchView(view) {
     startIndex = getCurrentWeekIndex();
     render(); closeDropdown(); clearSelection();
 }
-
 function render() {
     const blocks = getBlocks();
     blocks.forEach(b => b.classList.remove('visible'));
@@ -1296,7 +297,6 @@ function render() {
     document.getElementById('btn-prev').disabled = (startIndex === 0);
     document.getElementById('btn-next').disabled = (startIndex + 2 >= blocks.length);
 }
-
 function navigate(dir) {
     const blocks = getBlocks();
     startIndex += dir;
@@ -1304,7 +304,6 @@ function navigate(dir) {
     if (startIndex >= blocks.length - 1) startIndex = blocks.length - 2;
     render(); closeDropdown(); clearSelection();
 }
-
 function goToday() { startIndex = getCurrentWeekIndex(); render(); closeDropdown(); clearSelection(); }
 function clearSelection() { selectedCells.forEach(c => c.classList.remove('selected')); selectedCells = []; }
 function addToSelection(cell) { if (!cell.classList.contains('selected')) { cell.classList.add('selected'); selectedCells.push(cell); } }
@@ -1329,17 +328,15 @@ function showDropdown() {
 function closeDropdown() { dropdown.classList.remove('open'); }
 function applyStatus(color) { selectedCells.forEach(cell => { cell.classList.remove('green', 'red', 'grey', 'yellow', 'black'); if (color) cell.classList.add(color); }); closeDropdown(); clearSelection(); }
 
-// === WAKE LOCK ===
+// Wake Lock
 let wakeLock = null;
-async function requestWakeLock() {
-    try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); } } catch(e) {}
-}
+async function requestWakeLock() { try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); } } catch(e) {} }
 requestWakeLock();
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') requestWakeLock(); });
 
-// === INIT ===
-startIndex = getCurrentWeekIndex();
-render();
+// Init: load data + poll
+loadData();
+setInterval(loadData, REFRESH_INTERVAL);
 </script>
 </body>
 </html>
